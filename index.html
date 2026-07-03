@@ -356,7 +356,7 @@ a { color: var(--sapLinkColor, #0064d9); } strong { font-weight: 600; }
   display: block; width: 100%; height: auto; border-radius: 0; border: none;
 }
 
-/* ── Other sub-nav ─────────────────────────────────────── */
+
 .other-subnav {
   display: flex; gap: 0; margin-bottom: 1.5rem;
   border-bottom: 2px solid var(--sapElement_BorderColor, #d9dde1);
@@ -378,6 +378,34 @@ a { color: var(--sapLinkColor, #0064d9); } strong { font-weight: 600; }
 .icon-cat-key-label { font-size:.75rem; color:var(--sapContent_LabelColor,#556b82); }
 .icon-tag { font-size:.8125rem; background:var(--sapBackgroundColor,#f5f6f7); color:var(--sapTextColor,#1d2d3e); padding:.1875rem .625rem; border-radius:.375rem; border:1px solid var(--sapElement_BorderColor,#d9dde1); font-family:"72Mono","Lucida Console",monospace; cursor:pointer; transition:background .1s, border-color .1s; }
 .icon-tag:hover { background:var(--sapHighlightBackground,#e8f3ff); border-color:var(--sapHighlightColor,#0064d9); color:var(--sapHighlightColor,#0064d9); }
+
+/* ── Top nav dropdown ──────────────────────────────────── */
+.top-nav-dropdown { position: relative; display: flex; align-items: flex-end; height: 100%; }
+.top-nav-dropdown-btn { cursor: pointer; display: flex; align-items: center; gap: .25rem; }
+.top-nav-dropdown-btn.active { color: var(--sapHighlightColor, #0064d9); border-bottom: 2px solid var(--sapHighlightColor, #0064d9); margin-bottom: -1px; font-weight: 700; }
+.top-nav-dropdown-menu {
+  position: absolute; top: calc(100% + 1px); left: 0;
+  background: var(--sapGroup_ContentBackground, #fff);
+  border: 1px solid var(--sapElement_BorderColor, #d9dde1);
+  border-radius: 0 0 .5rem .5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  min-width: 11rem; z-index: 400;
+  opacity: 0; pointer-events: none;
+  transform: translateY(-.25rem);
+  transition: opacity .15s, transform .15s;
+  overflow: hidden;
+}
+.top-nav-dropdown-menu.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+.top-nav-dropdown-item {
+  display: block; padding: .625rem 1rem;
+  font-size: .875rem; color: var(--sapTextColor, #1d2d3e);
+  cursor: pointer; text-decoration: none;
+  transition: background .1s;
+  border-bottom: 1px solid var(--sapList_BorderColor, #f0f2f3);
+}
+.top-nav-dropdown-item:last-child { border-bottom: none; }
+.top-nav-dropdown-item:hover { background: var(--sapList_Hover_Background, #eaecee); color: var(--sapHighlightColor, #0064d9); }
+.top-nav-dropdown-item.active { background: var(--sapList_SelectionBackgroundColor, #e8f3ff); color: var(--sapHighlightColor, #0064d9); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -403,7 +431,13 @@ a { color: var(--sapLinkColor, #0064d9); } strong { font-weight: 600; }
   <a class="top-nav-item active" data-page="view-components">Components</a>
   <a class="top-nav-item" data-page="view-keys">Component Keys</a>
   <a class="top-nav-item" data-page="view-howto">How to Use the Skill</a>
-  <a class="top-nav-item" data-page="view-other">Other</a>
+  <div class="top-nav-dropdown" id="other-dropdown">
+    <a class="top-nav-item top-nav-dropdown-btn" onclick="toggleOtherDropdown(event)">Other <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <div class="top-nav-dropdown-menu" id="other-menu">
+      <a class="top-nav-dropdown-item" onclick="switchToOther('view-other-colors', this)">Semantic Colors</a>
+      <a class="top-nav-dropdown-item" onclick="switchToOther('view-other-icons', this)">SAP Icons</a>
+    </div>
+  </div>
 
   
   
@@ -1587,16 +1621,12 @@ a { color: var(--sapLinkColor, #0064d9); } strong { font-weight: 600; }
 </div>
 </div>
 
-<!-- ── Other View ─────────────────────────── -->
-<div id="view-other" class="page-view">
-  <div class="static-page">
-<h1 class="page-h1">Other References</h1>
-<div class="other-subnav">
-  <a class="other-subnav-item active" onclick="showOtherTab('colors', this)">Semantic Colors</a>
-  <a class="other-subnav-item" onclick="showOtherTab('icons', this)">SAP Icons</a>
+<!-- ── Other Views ────────────────────────────── -->
+<div id="view-other-colors" class="page-view">
+  <div class="static-page"><h1 class="page-h1">Semantic Colors</h1><p class="page-desc">SAP Horizon theme — value state colors used across all input and notification components.</p><div class="color-groups"><div class="color-group"><div class="color-group-header" style="border-left:4px solid #888"><h2 class="color-group-title" style="color:#888">Negative (Error)</h2></div><table class="color-table"><thead><tr><th>Role</th><th>Token</th><th>Value</th></tr></thead><tbody><tr><td class="cr-role">Text / Icon color</td><td><code>`sapErrorColor`</code></td><td><span class="swatch" style="background:`#aa0808`"></span><code class="hex">`#aa0808`</code></td></tr><tr><td class="cr-role">Element / indicator</td><td><code>`sapNegativeElementColor`</code></td><td><span class="swatch" style="background:`#f53232`"></span><code class="hex">`#f53232`</code></td></tr><tr><td class="cr-role">Background</td><td><code>`sapNegativeBackground`</code></td><td><span class="swatch" style="background:`#ffeaf4`"></span><code class="hex">`#ffeaf4`</code></td></tr><tr><td class="cr-role">Border</td><td><code>`sapNegativeBorderColor`</code></td><td><span class="swatch" style="background:`#e90b0b`"></span><code class="hex">`#e90b0b`</code></td></tr><tr><td class="cr-role">Field border</td><td><code>`sapField_InvalidColor`</code></td><td><span class="swatch" style="background:`#e90b0b`"></span><code class="hex">`#e90b0b`</code></td></tr></tbody></table></div><div class="color-group"><div class="color-group-header" style="border-left:4px solid #888"><h2 class="color-group-title" style="color:#888">Critical (Warning)</h2></div><table class="color-table"><thead><tr><th>Role</th><th>Token</th><th>Value</th></tr></thead><tbody><tr><td class="cr-role">Text / Icon color</td><td><code>`sapWarningColor`</code></td><td><span class="swatch" style="background:`#e76500`"></span><code class="hex">`#e76500`</code></td></tr><tr><td class="cr-role">Element / indicator</td><td><code>`sapCriticalElementColor`</code></td><td><span class="swatch" style="background:`#e76500`"></span><code class="hex">`#e76500`</code></td></tr><tr><td class="cr-role">Background</td><td><code>`sapCriticalBackground`</code></td><td><span class="swatch" style="background:`#fff8d6`"></span><code class="hex">`#fff8d6`</code></td></tr><tr><td class="cr-role">Border</td><td><code>`sapCriticalBorderColor`</code></td><td><span class="swatch" style="background:`#dd6100`"></span><code class="hex">`#dd6100`</code></td></tr><tr><td class="cr-role">Field border</td><td><code>`sapField_WarningColor`</code></td><td><span class="swatch" style="background:`#dd6100`"></span><code class="hex">`#dd6100`</code></td></tr></tbody></table></div><div class="color-group"><div class="color-group-header" style="border-left:4px solid #888"><h2 class="color-group-title" style="color:#888">Positive (Success)</h2></div><table class="color-table"><thead><tr><th>Role</th><th>Token</th><th>Value</th></tr></thead><tbody><tr><td class="cr-role">Text / Icon color</td><td><code>`sapSuccessColor`</code></td><td><span class="swatch" style="background:`#256f3a`"></span><code class="hex">`#256f3a`</code></td></tr><tr><td class="cr-role">Element / indicator</td><td><code>`sapPositiveElementColor`</code></td><td><span class="swatch" style="background:`#30914c`"></span><code class="hex">`#30914c`</code></td></tr><tr><td class="cr-role">Background</td><td><code>`sapPositiveBackground`</code></td><td><span class="swatch" style="background:`#f5fae5`"></span><code class="hex">`#f5fae5`</code></td></tr><tr><td class="cr-role">Border</td><td><code>`sapPositiveBorderColor`</code></td><td><span class="swatch" style="background:`#30914c`"></span><code class="hex">`#30914c`</code></td></tr><tr><td class="cr-role">Field border</td><td><code>`sapField_SuccessColor`</code></td><td><span class="swatch" style="background:`#30914c`"></span><code class="hex">`#30914c`</code></td></tr></tbody></table></div><div class="color-group"><div class="color-group-header" style="border-left:4px solid #0070f2"><h2 class="color-group-title" style="color:#0070f2">Information</h2></div><table class="color-table"><thead><tr><th>Role</th><th>Token</th><th>Value</th></tr></thead><tbody><tr><td class="cr-role">Text / Icon color</td><td><code>`sapInformationColor`</code></td><td><span class="swatch" style="background:`#0070f2`"></span><code class="hex">`#0070f2`</code></td></tr><tr><td class="cr-role">Element / indicator</td><td><code>`sapInformativeElementColor`</code></td><td><span class="swatch" style="background:`#0070f2`"></span><code class="hex">`#0070f2`</code></td></tr><tr><td class="cr-role">Background</td><td><code>`sapInformationBackground`</code></td><td><span class="swatch" style="background:`#e1f4ff`"></span><code class="hex">`#e1f4ff`</code></td></tr><tr><td class="cr-role">Border</td><td><code>`sapInformationBorderColor`</code></td><td><span class="swatch" style="background:`#0070f2`"></span><code class="hex">`#0070f2`</code></td></tr><tr><td class="cr-role">Field border</td><td><code>`sapField_InformationColor`</code></td><td><span class="swatch" style="background:`#0070f2`"></span><code class="hex">`#0070f2`</code></td></tr></tbody></table></div><div class="color-group"><div class="color-group-header" style="border-left:4px solid #788fa6"><h2 class="color-group-title" style="color:#788fa6">Neutral</h2></div><table class="color-table"><thead><tr><th>Role</th><th>Token</th><th>Value</th></tr></thead><tbody><tr><td class="cr-role">Element / indicator</td><td><code>`sapNeutralElementColor`</code></td><td><span class="swatch" style="background:`#788fa6`"></span><code class="hex">`#788fa6`</code></td></tr><tr><td class="cr-role">Background</td><td><code>`sapNeutralBackground`</code></td><td><span class="swatch" style="background:`#eff1f2`"></span><code class="hex">`#eff1f2`</code></td></tr><tr><td class="cr-role">Border</td><td><code>`sapNeutralBorderColor`</code></td><td><span class="swatch" style="background:`#788fa6`"></span><code class="hex">`#788fa6`</code></td></tr></tbody></table></div></div></div>
 </div>
-<div id="other-colors" class="other-tab active"><div class="static-page"><h1 class="page-h1">Semantic Colors</h1><p class="page-desc">SAP Horizon theme — value state colors used across all input and notification components.</p><div class="color-groups"><div class="color-group"><div class="color-group-header" style="border-left:4px solid #888"><h2 class="color-group-title" style="color:#888">Negative (Error)</h2></div><table class="color-table"><thead><tr><th>Role</th><th>Token</th><th>Value</th></tr></thead><tbody><tr><td class="cr-role">Text / Icon color</td><td><code>`sapErrorColor`</code></td><td><span class="swatch" style="background:`#aa0808`"></span><code class="hex">`#aa0808`</code></td></tr><tr><td class="cr-role">Element / indicator</td><td><code>`sapNegativeElementColor`</code></td><td><span class="swatch" style="background:`#f53232`"></span><code class="hex">`#f53232`</code></td></tr><tr><td class="cr-role">Background</td><td><code>`sapNegativeBackground`</code></td><td><span class="swatch" style="background:`#ffeaf4`"></span><code class="hex">`#ffeaf4`</code></td></tr><tr><td class="cr-role">Border</td><td><code>`sapNegativeBorderColor`</code></td><td><span class="swatch" style="background:`#e90b0b`"></span><code class="hex">`#e90b0b`</code></td></tr><tr><td class="cr-role">Field border</td><td><code>`sapField_InvalidColor`</code></td><td><span class="swatch" style="background:`#e90b0b`"></span><code class="hex">`#e90b0b`</code></td></tr></tbody></table></div><div class="color-group"><div class="color-group-header" style="border-left:4px solid #888"><h2 class="color-group-title" style="color:#888">Critical (Warning)</h2></div><table class="color-table"><thead><tr><th>Role</th><th>Token</th><th>Value</th></tr></thead><tbody><tr><td class="cr-role">Text / Icon color</td><td><code>`sapWarningColor`</code></td><td><span class="swatch" style="background:`#e76500`"></span><code class="hex">`#e76500`</code></td></tr><tr><td class="cr-role">Element / indicator</td><td><code>`sapCriticalElementColor`</code></td><td><span class="swatch" style="background:`#e76500`"></span><code class="hex">`#e76500`</code></td></tr><tr><td class="cr-role">Background</td><td><code>`sapCriticalBackground`</code></td><td><span class="swatch" style="background:`#fff8d6`"></span><code class="hex">`#fff8d6`</code></td></tr><tr><td class="cr-role">Border</td><td><code>`sapCriticalBorderColor`</code></td><td><span class="swatch" style="background:`#dd6100`"></span><code class="hex">`#dd6100`</code></td></tr><tr><td class="cr-role">Field border</td><td><code>`sapField_WarningColor`</code></td><td><span class="swatch" style="background:`#dd6100`"></span><code class="hex">`#dd6100`</code></td></tr></tbody></table></div><div class="color-group"><div class="color-group-header" style="border-left:4px solid #888"><h2 class="color-group-title" style="color:#888">Positive (Success)</h2></div><table class="color-table"><thead><tr><th>Role</th><th>Token</th><th>Value</th></tr></thead><tbody><tr><td class="cr-role">Text / Icon color</td><td><code>`sapSuccessColor`</code></td><td><span class="swatch" style="background:`#256f3a`"></span><code class="hex">`#256f3a`</code></td></tr><tr><td class="cr-role">Element / indicator</td><td><code>`sapPositiveElementColor`</code></td><td><span class="swatch" style="background:`#30914c`"></span><code class="hex">`#30914c`</code></td></tr><tr><td class="cr-role">Background</td><td><code>`sapPositiveBackground`</code></td><td><span class="swatch" style="background:`#f5fae5`"></span><code class="hex">`#f5fae5`</code></td></tr><tr><td class="cr-role">Border</td><td><code>`sapPositiveBorderColor`</code></td><td><span class="swatch" style="background:`#30914c`"></span><code class="hex">`#30914c`</code></td></tr><tr><td class="cr-role">Field border</td><td><code>`sapField_SuccessColor`</code></td><td><span class="swatch" style="background:`#30914c`"></span><code class="hex">`#30914c`</code></td></tr></tbody></table></div><div class="color-group"><div class="color-group-header" style="border-left:4px solid #0070f2"><h2 class="color-group-title" style="color:#0070f2">Information</h2></div><table class="color-table"><thead><tr><th>Role</th><th>Token</th><th>Value</th></tr></thead><tbody><tr><td class="cr-role">Text / Icon color</td><td><code>`sapInformationColor`</code></td><td><span class="swatch" style="background:`#0070f2`"></span><code class="hex">`#0070f2`</code></td></tr><tr><td class="cr-role">Element / indicator</td><td><code>`sapInformativeElementColor`</code></td><td><span class="swatch" style="background:`#0070f2`"></span><code class="hex">`#0070f2`</code></td></tr><tr><td class="cr-role">Background</td><td><code>`sapInformationBackground`</code></td><td><span class="swatch" style="background:`#e1f4ff`"></span><code class="hex">`#e1f4ff`</code></td></tr><tr><td class="cr-role">Border</td><td><code>`sapInformationBorderColor`</code></td><td><span class="swatch" style="background:`#0070f2`"></span><code class="hex">`#0070f2`</code></td></tr><tr><td class="cr-role">Field border</td><td><code>`sapField_InformationColor`</code></td><td><span class="swatch" style="background:`#0070f2`"></span><code class="hex">`#0070f2`</code></td></tr></tbody></table></div><div class="color-group"><div class="color-group-header" style="border-left:4px solid #788fa6"><h2 class="color-group-title" style="color:#788fa6">Neutral</h2></div><table class="color-table"><thead><tr><th>Role</th><th>Token</th><th>Value</th></tr></thead><tbody><tr><td class="cr-role">Element / indicator</td><td><code>`sapNeutralElementColor`</code></td><td><span class="swatch" style="background:`#788fa6`"></span><code class="hex">`#788fa6`</code></td></tr><tr><td class="cr-role">Background</td><td><code>`sapNeutralBackground`</code></td><td><span class="swatch" style="background:`#eff1f2`"></span><code class="hex">`#eff1f2`</code></td></tr><tr><td class="cr-role">Border</td><td><code>`sapNeutralBorderColor`</code></td><td><span class="swatch" style="background:`#788fa6`"></span><code class="hex">`#788fa6`</code></td></tr></tbody></table></div></div></div></div>
-<div id="other-icons" class="other-tab" style="display:none"><div class="static-page">
+<div id="view-other-icons" class="page-view">
+  <div class="static-page">
 <h1 class="page-h1">SAP Icons Reference</h1>
 <p class="page-desc">679 icons across 19 categories in the <code>SAP-icons</code> font. Referenced as <code>sap-icon://icon-name</code>. One representative Figma component key is provided per category.</p>
 <div class="icon-search-wrap"><input type="text" id="icon-search" class="icon-search" placeholder="Filter icons by name…" oninput="filterIcons(this.value)"></div>
@@ -1770,9 +1800,7 @@ a { color: var(--sapLinkColor, #0064d9); } strong { font-weight: 600; }
   <code class="key-val" onclick="copyKey(this)" title="Click to copy">278f08e05f4005bc85d298cd5a7ddf29d8eff0f3</code>
 </div>
   </div>
-  <div class="icon-tags"><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">table-chart</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">table-column</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">table-row</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">table-view</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">grid</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">list</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">sort</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">filter</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">group</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">total</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">merge</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">freeze</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">column-chart-dual-axis</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">horizontal-grip</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">vertical-grip</span></div>
-</div></div></div></div>
-</div>
+  <div class="icon-tags"><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">table-chart</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">table-column</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">table-row</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">table-view</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">grid</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">list</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">sort</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">filter</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">group</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">total</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">merge</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">freeze</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">column-chart-dual-axis</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">horizontal-grip</span><span class="icon-tag" onclick="copyIconName(this)" title="Click to copy">vertical-grip</span>
 </div>
 
 <!-- ── How to Use View ────────────────────────────── -->
@@ -1831,12 +1859,32 @@ document.querySelectorAll('.top-nav-item').forEach(tab => {
   });
 });
 
-function showOtherTab(tab, el) {
-  document.querySelectorAll('.other-subnav-item').forEach(i => i.classList.remove('active'));
-  document.querySelectorAll('.other-tab').forEach(t => t.style.display = 'none');
-  el.classList.add('active');
-  document.getElementById('other-' + tab).style.display = '';
+function toggleOtherDropdown(e) {
+  e.stopPropagation();
+  const menu = document.getElementById('other-menu');
+  const btn  = document.querySelector('.top-nav-dropdown-btn');
+  const isOpen = menu.classList.contains('open');
+  menu.classList.toggle('open', !isOpen);
+  btn.classList.toggle('active', !isOpen);
 }
+function switchToOther(viewId, el) {
+  // Activate the correct page view
+  document.querySelectorAll('.top-nav-item').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.top-nav-dropdown-item').forEach(i => i.classList.remove('active'));
+  document.getElementById(viewId).classList.add('active');
+  el.classList.add('active');
+  document.querySelector('.top-nav-dropdown-btn').classList.add('active');
+  document.getElementById('other-menu').classList.remove('open');
+  document.querySelector('.shell-search').style.display = 'none';
+  document.getElementById('result-count').style.display = 'none';
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('.top-nav-dropdown')) {
+    document.getElementById('other-menu').classList.remove('open');
+    // Don't remove active from btn if a sub-page is still shown
+  }
+});
 
 function copyIconName(el) {
   navigator.clipboard.writeText(el.textContent).then(() => {
