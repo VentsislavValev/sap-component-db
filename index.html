@@ -1847,12 +1847,17 @@ a { color: var(--sapLinkColor, #0064d9); } strong { font-weight: 600; }
 
 <script>
 // ── Top Nav ──────────────────────────────────────────────
-document.querySelectorAll('.top-nav-item').forEach(tab => {
+document.querySelectorAll('.top-nav-item[data-page]').forEach(tab => {
   tab.addEventListener('click', () => {
+    const target = document.getElementById(tab.dataset.page);
+    if (!target) return;
     document.querySelectorAll('.top-nav-item').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.top-nav-dropdown-btn').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.top-nav-dropdown-item').forEach(i => i.classList.remove('active'));
+    document.getElementById('other-menu').classList.remove('open');
     tab.classList.add('active');
-    document.getElementById(tab.dataset.page).classList.add('active');
+    target.classList.add('active');
     const isComponents = tab.dataset.page === 'view-components';
     document.querySelector('.shell-search').style.display = isComponents ? '' : 'none';
     document.getElementById('result-count').style.display = isComponents ? '' : 'none';
