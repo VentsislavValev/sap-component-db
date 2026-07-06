@@ -171,7 +171,8 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 .illus-section .section-title { background: transparent; }
 .illus-grid { display: flex; flex-direction: column; gap: .75rem; padding: 0 1.5rem 1rem; }
 .illus-label { font-size: .6875rem; font-weight: 600; color: var(--sapContent_LabelColor, #556b82); text-transform: uppercase; letter-spacing: .05em; margin-bottom: .375rem; }
-.illus-img { display: block; max-width: 100%; height: auto; border-radius: .5rem; border: 1px solid var(--sapElement_BorderColor, #d9dde1); }
+.illus-img { display: block; height: auto; border-radius: .5rem; border: 1px solid var(--sapElement_BorderColor, #d9dde1); max-width: 100%; }
+.illus-item { display: inline-block; }
 
 /* ── Tables ────────────────────────────────────────────── */
 .prop-table, .tech-table {
@@ -349,11 +350,14 @@ a { color: var(--sapLinkColor, #0064d9); } strong { font-weight: 600; }
 
 .card-intro-img {
   margin-top: .875rem;
+  display: inline-block;
   border-radius: .625rem; overflow: hidden;
   border: 1px solid var(--sapElement_BorderColor, #d9dde1);
+  max-width: 100%;
 }
-.card-intro-img .illus-img {
-  display: block; width: 100%; height: auto; border-radius: 0; border: none;
+.card-intro-img img {
+  display: block; height: auto; border-radius: 0; border: none;
+  max-width: 100%;
 }
 
 
