@@ -4034,9 +4034,9 @@ Input JSON:
     <!-- Naming tab -->
     <div style="margin-bottom:2.5rem;">
       <h2 style="font-size:1.25rem;font-weight:700;color:var(--sapTitleColor,#1d2d3e);margin:0 0 1rem;">Naming — How it works</h2>
-      <p style="font-size:.9375rem;color:var(--sapTextColor,#1d2d3e);line-height:1.7;margin:0 0 .75rem;">Paste the section link, enter the component name, and click <em>Preview &amp; Rename</em>. The plugin scans all 901px and 427px frames whose names start with a digit and renames them sequentially:</p>
-      <code style="display:block;background:#f5f6f7;border:1px solid #d9dde1;border-radius:.375rem;padding:.75rem 1rem;font-size:.875rem;">01_ComponentName_OriginalType_v1</code>
-      <p style="font-size:.875rem;color:var(--sapContent_LabelColor,#6a7489);margin:.75rem 0 0;line-height:1.6;">The plugin works from the highest index downward to avoid index-shifting issues.</p>
+      <p style="font-size:.9375rem;color:var(--sapTextColor,#1d2d3e);line-height:1.7;margin:0 0 .75rem;">Enter the section link, component name, and version. The plugin walks the section in order, uses <strong>heading text nodes</strong> to determine section names, and renames all 901px and 427px illustration frames accordingly:</p>
+      <code style="display:block;background:#f5f6f7;border:1px solid #d9dde1;border-radius:.375rem;padding:.75rem 1rem;font-size:.875rem;margin-bottom:.5rem;">01_ComponentName_SectionName_01_v1148</code>
+      <p style="font-size:.875rem;color:var(--sapContent_LabelColor,#6a7489);margin:.75rem 0 0;line-height:1.6;">Thumbnails (312px wide) are renamed separately as <code style="font-size:.8125rem;background:#f5f6f7;padding:1px 5px;border-radius:3px;">00_ComponentName_Thumbnail_v1148</code>. Alt Tag frames and heading text nodes are never renamed or counted. The section counter resets each time a new heading is encountered.</p>
     </div>
 
   </div>
