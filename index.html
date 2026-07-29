@@ -3932,6 +3932,12 @@ testInst.remove();</pre>
       <p style="font-size:1rem;color:var(--sapContent_LabelColor,#6a7489);margin:.5rem 0 0;">A Figma plugin for writing alt tags for guideline illustrations and renaming illustration frames — works with Claude or any LLM.</p>
     </div>
 
+    <!-- Demo video placeholder -->
+    <div id="plugin-demo-video" style="display:none;margin-bottom:2.5rem;">
+      <h2 style="font-size:1.25rem;font-weight:700;color:var(--sapTitleColor,#1d2d3e);margin:0 0 1rem;">Demo</h2>
+      <div id="plugin-video-container"></div>
+    </div>
+
     <!-- Download -->
     <div style="display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:2.5rem;flex-wrap:wrap;">
       <a href="https://github.com/ventsislavvalev/sap-component-db/raw/main/downloads/sap-content-assistant-plugin.zip"
@@ -4003,17 +4009,17 @@ testInst.remove();</pre>
       <div style="margin-top:1.5rem;">
         <div style="font-size:.875rem;font-weight:700;color:var(--sapTitleColor,#1d2d3e);margin-bottom:.5rem;">Universal LLM prompt</div>
         <div style="position:relative;">
-          <pre id="llm-prompt" style="background:#f5f6f7;border:1px solid #d9dde1;border-radius:.375rem;padding:1rem;font-size:.8125rem;font-family:'SF Mono','Menlo',monospace;line-height:1.6;white-space:pre-wrap;margin:0;color:#1d2d3e;">Generate alt text for each SAP Fiori illustration in the JSON below.
-Return ONLY a JSON array. Each item must have:
-  "id": the exact id value from the input
-  "alt": a concise alt text string (1–2 sentences)
+          <pre id="llm-prompt" style="background:#f5f6f7;border:1px solid #d9dde1;border-radius:.375rem;padding:1rem;font-size:.8125rem;font-family:'SF Mono','Menlo',monospace;line-height:1.6;white-space:pre-wrap;margin:0;color:#1d2d3e;">Generate alt text for each SAP Fiori illustration.
+Return ONLY a JSON array — each item: {"id":"...","alt":"..."}
 
-Style rules:
-- Start with the count and layout (e.g. "Two toolbar variants labeled A and B:")
-- Describe only what is visually present — exact labels, values, states
-- Quote exact on-screen text in single quotes
-- Do not describe cursor icons — describe the interaction state instead
-- Do not use phrases like "demonstrating" or "showing how"
+Rules:
+- Start with count + layout: "Two toolbar variants labeled A and B:"
+- Use SAP terminology from the article field (e.g. "Object Page Header",
+  "Tool Header", "cozy mode", "Size S", state names)
+- Quote exact on-screen text in single quotes: 'Edit', 'Cancel'
+- Describe what is visually present — no "demonstrating" or "showing how"
+- Do not describe cursor icons — name the state: Hover, Down, Focus
+- 1–2 sentences per image
 
 Input JSON:
 [PASTE EXPORT JSON HERE]</pre>
