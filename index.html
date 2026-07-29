@@ -723,6 +723,7 @@ a { color: var(--sapLinkColor, #0064d9); } strong { font-weight: 600; }
   </div>
   <a class="top-nav-item" data-page="view-illustrations" onclick="switchTab('view-illustrations')">Illustration Skill</a>
   <a class="top-nav-item" data-page="view-illus-plugin" onclick="switchTab('view-illus-plugin')">Illustration Plugin</a>
+  <a class="top-nav-item" data-page="view-content-plugin" onclick="switchTab('view-content-plugin')">Content Assistant Plugin</a>
   <div class="top-nav-dropdown" id="other-dropdown" onmouseleave="document.getElementById('other-menu').classList.remove('open')">
     <a class="top-nav-item top-nav-dropdown-btn" onclick="toggleOtherDropdown(event)">Other <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     <div class="top-nav-dropdown-menu" id="other-menu">
@@ -3922,6 +3923,125 @@ testInst.remove();</pre>
 </div>
 </div>
 
+
+<div id="view-content-plugin" class="page-view">
+  <div class="static-page">
+    <div style="padding:7rem 0 2rem;border-bottom:1px solid var(--sapGroup_TitleBorderColor,#d9dde1);margin-bottom:2rem;">
+      <h1 style="font-size:2rem;font-weight:700;color:var(--sapTitleColor,#1d2d3e);margin:0;line-height:1.1;">SAP Content Assistant Plugin</h1>
+      <button class="share-btn" data-hash="view-content-plugin" onclick="copyPageLink('view-content-plugin')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M8 1h3v3M11 1L5 7M5 2H2a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg> Share</button>
+      <p style="font-size:1rem;color:var(--sapContent_LabelColor,#6a7489);margin:.5rem 0 0;">A Figma plugin for writing alt tags for guideline illustrations and renaming illustration frames — works with Claude or any LLM.</p>
+    </div>
+
+    <!-- Download -->
+    <div style="display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:2.5rem;flex-wrap:wrap;">
+      <a href="https://github.com/ventsislavvalev/sap-component-db/raw/main/downloads/sap-content-assistant-plugin.zip"
+         style="display:inline-flex;align-items:center;gap:.5rem;background:#0070f2;color:#fff;font-size:.875rem;font-weight:700;padding:.625rem 1.25rem;border-radius:.375rem;text-decoration:none;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download Plugin
+      </a>
+      <div style="font-size:.8125rem;color:var(--sapContent_LabelColor,#6a7489);line-height:1.6;padding:.375rem 0;">
+        Requires <strong>Figma desktop app</strong> · Works with any LLM
+      </div>
+    </div>
+
+    <!-- What it does -->
+    <div style="margin-bottom:2.5rem;">
+      <h2 style="font-size:1.25rem;font-weight:700;color:var(--sapTitleColor,#1d2d3e);margin:0 0 1rem;">What it does</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+        <div style="background:var(--sapGroup_ContentBackground,#fff);border:1px solid var(--sapGroup_TitleBorderColor,#d9dde1);border-radius:.5rem;padding:1.25rem;">
+          <div style="font-size:1.25rem;margin-bottom:.5rem;">🏷️</div>
+          <div style="font-weight:700;color:var(--sapTitleColor,#1d2d3e);margin-bottom:.375rem;">Alt Tag Writing</div>
+          <div style="font-size:.875rem;color:var(--sapContent_LabelColor,#6a7489);line-height:1.6;">Export illustration data from Figma, generate alt text with any LLM, and write it back in one click.</div>
+        </div>
+        <div style="background:var(--sapGroup_ContentBackground,#fff);border:1px solid var(--sapGroup_TitleBorderColor,#d9dde1);border-radius:.5rem;padding:1.25rem;">
+          <div style="font-size:1.25rem;margin-bottom:.5rem;">✏️</div>
+          <div style="font-weight:700;color:var(--sapTitleColor,#1d2d3e);margin-bottom:.375rem;">Frame Renaming</div>
+          <div style="font-size:.875rem;color:var(--sapContent_LabelColor,#6a7489);line-height:1.6;">Rename illustration frames sequentially to the correct SAP naming convention: <code style="font-size:.8125rem;background:#f5f6f7;padding:1px 5px;border-radius:3px;">01_ComponentName_Type_v1</code></div>
+        </div>
+        <div style="background:var(--sapGroup_ContentBackground,#fff);border:1px solid var(--sapGroup_TitleBorderColor,#d9dde1);border-radius:.5rem;padding:1.25rem;">
+          <div style="font-size:1.25rem;margin-bottom:.5rem;">🤖</div>
+          <div style="font-weight:700;color:var(--sapTitleColor,#1d2d3e);margin-bottom:.375rem;">LLM-agnostic</div>
+          <div style="font-size:.875rem;color:var(--sapContent_LabelColor,#6a7489);line-height:1.6;">Works with Claude, GPT-4, Gemini, or any LLM that can follow instructions and return JSON.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Installation -->
+    <div style="margin-bottom:2.5rem;">
+      <h2 style="font-size:1.25rem;font-weight:700;color:var(--sapTitleColor,#1d2d3e);margin:0 0 1rem;">Installation</h2>
+      <ol style="font-size:.9375rem;color:var(--sapTextColor,#1d2d3e);line-height:2;padding-left:1.25rem;margin:0;">
+        <li>Download and unzip the plugin folder above</li>
+        <li>Open <strong>Figma desktop app</strong> (development plugins do not work in the browser)</li>
+        <li>Go to <strong>Main menu → Plugins → Development → Import plugin from manifest…</strong></li>
+        <li>Navigate to the unzipped folder and select <code style="font-size:.8125rem;background:#f5f6f7;padding:1px 5px;border-radius:3px;">manifest.json</code></li>
+        <li>The plugin now appears under <strong>Plugins → Development → SAP Content Assistant</strong></li>
+      </ol>
+      <div style="margin-top:1rem;padding:.75rem 1rem;background:#f0f6ff;border:1px solid #b8d6ff;border-radius:.375rem;font-size:.875rem;color:#0050b3;">
+        <strong>Tip:</strong> If the plugin fails to load, run <code style="font-size:.8125rem;background:#ddeeff;padding:1px 5px;border-radius:3px;">xattr -c manifest.json</code> in Terminal to remove the macOS quarantine flag.
+      </div>
+    </div>
+
+    <!-- Alt Tags workflow -->
+    <div style="margin-bottom:2.5rem;">
+      <h2 style="font-size:1.25rem;font-weight:700;color:var(--sapTitleColor,#1d2d3e);margin:0 0 1rem;">Alt Tags — How it works</h2>
+      <div style="display:flex;flex-direction:column;gap:.75rem;">
+        <div style="display:flex;gap:1rem;align-items:flex-start;">
+          <div style="flex-shrink:0;width:1.75rem;height:1.75rem;background:#0070f2;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8125rem;font-weight:700;">1</div>
+          <div><strong>Export from Figma</strong> — paste your article frame link (optional, gives context) and illustration section link, then click <em>Export Data</em>. The plugin reads the section and outputs a JSON payload.</div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;">
+          <div style="flex-shrink:0;width:1.75rem;height:1.75rem;background:#0070f2;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8125rem;font-weight:700;">2</div>
+          <div><strong>Send to your LLM</strong> — copy the JSON and paste it to any LLM with the prompt below. Claude Code users can load the <a href="#" onclick="switchTab('view-illustrations');return false;" style="color:#0064d9;">Alt Tag Creation skill</a> for best quality.</div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;">
+          <div style="flex-shrink:0;width:1.75rem;height:1.75rem;background:#0070f2;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8125rem;font-weight:700;">3</div>
+          <div><strong>Import results</strong> — paste the LLM's JSON response into the Import field and click <em>Write Alt Tags to Figma</em>. Done.</div>
+        </div>
+      </div>
+
+      <!-- Universal prompt -->
+      <div style="margin-top:1.5rem;">
+        <div style="font-size:.875rem;font-weight:700;color:var(--sapTitleColor,#1d2d3e);margin-bottom:.5rem;">Universal LLM prompt</div>
+        <div style="position:relative;">
+          <pre id="llm-prompt" style="background:#f5f6f7;border:1px solid #d9dde1;border-radius:.375rem;padding:1rem;font-size:.8125rem;font-family:'SF Mono','Menlo',monospace;line-height:1.6;white-space:pre-wrap;margin:0;color:#1d2d3e;">Generate alt text for each SAP Fiori illustration in the JSON below.
+Return ONLY a JSON array. Each item must have:
+  "id": the exact id value from the input
+  "alt": a concise alt text string (1–2 sentences)
+
+Style rules:
+- Start with the count and layout (e.g. "Two toolbar variants labeled A and B:")
+- Describe only what is visually present — exact labels, values, states
+- Quote exact on-screen text in single quotes
+- Do not describe cursor icons — describe the interaction state instead
+- Do not use phrases like "demonstrating" or "showing how"
+
+Input JSON:
+[PASTE EXPORT JSON HERE]</pre>
+          <button onclick="copyPrompt()" id="copy-prompt-btn" style="position:absolute;top:.5rem;right:.5rem;background:#fff;border:1px solid #d9dde1;border-radius:.25rem;padding:.25rem .625rem;font-size:.75rem;font-weight:600;color:#0064d9;cursor:pointer;">Copy</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expected response format -->
+    <div style="margin-bottom:2.5rem;">
+      <h2 style="font-size:1.25rem;font-weight:700;color:var(--sapTitleColor,#1d2d3e);margin:0 0 1rem;">Expected LLM response format</h2>
+      <pre style="background:#f5f6f7;border:1px solid #d9dde1;border-radius:.375rem;padding:1rem;font-size:.8125rem;font-family:'SF Mono','Menlo',monospace;line-height:1.6;white-space:pre-wrap;margin:0;color:#1d2d3e;">[
+  {"id": "123:456", "alt": "Anatomy diagram of a footer toolbar with two callout labels..."},
+  {"id": "123:789", "alt": "Two toolbar states labeled A and B: (A) enabled with..."}
+]</pre>
+    </div>
+
+    <!-- Naming tab -->
+    <div style="margin-bottom:2.5rem;">
+      <h2 style="font-size:1.25rem;font-weight:700;color:var(--sapTitleColor,#1d2d3e);margin:0 0 1rem;">Naming — How it works</h2>
+      <p style="font-size:.9375rem;color:var(--sapTextColor,#1d2d3e);line-height:1.7;margin:0 0 .75rem;">Paste the section link, enter the component name, and click <em>Preview &amp; Rename</em>. The plugin scans all 901px and 427px frames whose names start with a digit and renames them sequentially:</p>
+      <code style="display:block;background:#f5f6f7;border:1px solid #d9dde1;border-radius:.375rem;padding:.75rem 1rem;font-size:.875rem;">01_ComponentName_OriginalType_v1</code>
+      <p style="font-size:.875rem;color:var(--sapContent_LabelColor,#6a7489);margin:.75rem 0 0;line-height:1.6;">The plugin works from the highest index downward to avoid index-shifting issues.</p>
+    </div>
+
+  </div>
+</div>
+
 <script>
 // ── Top Nav ──────────────────────────────────────────────
 document.querySelectorAll('.top-nav-item[data-page]').forEach(tab => {
@@ -4403,6 +4523,20 @@ ${json}`;
 }
 
 // ── SHARE LINK ────────────────────────────────────────────────
+function copyPrompt() {
+  const pre = document.getElementById('llm-prompt');
+  const btn = document.getElementById('copy-prompt-btn');
+  try {
+    const range = document.createRange();
+    range.selectNodeContents(pre);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    btn.textContent = '✓ Copied';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  } catch(e) { btn.textContent = 'Select + Cmd+C'; }
+}
 function copyPageLink(hash) {
   const url = window.location.origin + window.location.pathname + '#' + hash;
   navigator.clipboard.writeText(url).then(() => {
@@ -4429,6 +4563,7 @@ const HASH_PAGE_MAP = {
   'view-keys': 'view-keys', 'view-howto': 'view-howto',
   'view-roadmap': 'view-roadmap', 'view-illustrations': 'view-illustrations',
   'view-illus-plugin': 'view-illus-plugin', 'view-illus-plugin': 'view-illus-plugin',
+  'view-content-plugin': 'view-content-plugin',
 };
 
 function navigateToHash(hash) {
